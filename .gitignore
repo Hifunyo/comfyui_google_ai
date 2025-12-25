@@ -1,0 +1,25 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Test files
+test_*.py
+test_*.png
+updated_node_*.png
+check_models.py
+get_model_details.py
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
