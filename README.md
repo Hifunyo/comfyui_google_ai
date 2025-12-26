@@ -45,6 +45,8 @@ This is a custom node for ComfyUI that integrates Google AI Studio's Gemini 3 Pr
 
 4. Restart ComfyUI
 
+**Note:** The API key input field will automatically display as a password field (showing asterisks) for security. The actual API key is only used internally and is not exposed in the console output (only a masked version is shown).
+
 ### Usage
 
 #### Getting API Key
@@ -56,7 +58,7 @@ This is a custom node for ComfyUI that integrates Google AI Studio's Gemini 3 Pr
 #### Text-to-Image Workflow
 
 1. Add the **GoogleAIGenerateImage** node to your workflow
-2. Enter your API key in the `api_key` field
+2. Enter your API key in the `api_key` field (it will be displayed as asterisks for security)
 3. Enter your text prompt in the `prompt` field
 4. Configure parameters:
    - `temperature`: Controls randomness (default: 1.0)
@@ -79,7 +81,7 @@ This is a custom node for ComfyUI that integrates Google AI Studio's Gemini 3 Pr
 | Parameter | Type | Description | Default |
 |-----------|------|-------------|---------|
 | `prompt` | STRING | Text description of the image to generate | Required |
-| `api_key` | STRING | Google AI Studio API key | Required |
+| `api_key` | STRING | Google AI Studio API key (displayed as asterisks) | Required |
 | `model` | STRING | Model to use (gemini-3-pro-image-preview) | gemini-3-pro-image-preview |
 | `temperature` | FLOAT | Controls randomness (0.0-2.0) | 1.0 |
 | `aspect_ratio` | STRING | Image aspect ratio | 9:16 |
@@ -87,6 +89,8 @@ This is a custom node for ComfyUI that integrates Google AI Studio's Gemini 3 Pr
 | `num_images` | INT | Number of images to generate (1-10) | 1 |
 | `google_search` | BOOLEAN | Enable Google Search | false |
 | `init_image` | IMAGE | Optional input image for image-to-image | Optional |
+
+**Security Note:** The API key input field is displayed as a password field (showing asterisks) to protect your credentials. The console output also shows only a masked version of the key.
 
 ### Proxy Configuration
 
@@ -166,6 +170,8 @@ This project is licensed under the MIT License.
 
 4. 重启 ComfyUI
 
+**注意：** API 密钥输入框会自动显示为密码框（显示星号）以确保安全。实际的 API 密钥仅在内部使用，不会在控制台输出中暴露（仅显示脱敏版本）。
+
 ### 使用方法
 
 #### 获取 API 密钥
@@ -177,7 +183,7 @@ This project is licensed under the MIT License.
 #### 文生图工作流
 
 1. 将 **GoogleAIGenerateImage** 节点添加到您的工作流中
-2. 在 `api_key` 字段中输入您的 API 密钥
+2. 在 `api_key` 字段中输入您的 API 密钥（为了安全，它会显示为星号）
 3. 在 `prompt` 字段中输入您的文本提示
 4. 配置参数：
    - `temperature`：控制随机性（默认：1.0）
@@ -200,7 +206,7 @@ This project is licensed under the MIT License.
 | 参数 | 类型 | 描述 | 默认值 |
 |------|------|------|--------|
 | `prompt` | STRING | 要生成的图像的文本描述 | 必填 |
-| `api_key` | STRING | Google AI Studio API 密钥 | 必填 |
+| `api_key` | STRING | Google AI Studio API 密钥（显示为星号） | 必填 |
 | `model` | STRING | 要使用的模型（gemini-3-pro-image-preview） | gemini-3-pro-image-preview |
 | `temperature` | FLOAT | 控制随机性（0.0-2.0） | 1.0 |
 | `aspect_ratio` | STRING | 图像宽高比 | 9:16 |
@@ -208,6 +214,8 @@ This project is licensed under the MIT License.
 | `num_images` | INT | 要生成的图像数量（1-10） | 1 |
 | `google_search` | BOOLEAN | 启用 Google 搜索 | false |
 | `init_image` | IMAGE | 可选的输入图像，用于图生图 | 可选 |
+
+**安全提示：** API 密钥输入框显示为密码框（显示星号）以保护您的凭据。控制台输出也仅显示密钥的脱敏版本。
 
 ### 代理配置
 

@@ -16,7 +16,7 @@ class GoogleAIGenerateImage:
         return {
             "required": {
                 "prompt": ("STRING", {"multiline": True}),
-                "api_key": ("STRING", {"password": True}),
+                "api_key": ("STRING",),
                 "model": ([
                 "gemini-3-pro-image-preview"
             ],),
