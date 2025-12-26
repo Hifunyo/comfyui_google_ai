@@ -193,6 +193,11 @@ class GoogleAIGenerateImage:
         # Collect all generated images
         generated_images = []
         
+        # Token usage tracking
+        total_prompt_tokens = 0
+        total_candidates_tokens = 0
+        total_tokens = 0
+        
         # Send multiple API requests to generate multiple images
         for i in range(num_images):
             if i > 0:
@@ -220,6 +225,19 @@ class GoogleAIGenerateImage:
             if "candidates" not in result or not result["candidates"]:
                 print(f"[Google AI Node] [{time.strftime('%H:%M:%S')}] ERROR: No candidates found in API response")
                 raise ValueError("No candidates found in API response")
+            
+            # Extract token usage from response
+            if "usageMetadata" in result:
+                usage = result["usageMetadata"]
+                prompt_tokens = usage.get("promptTokenCount", 0)
+                candidates_tokens = usage.get("candidatesTokenCount", 0)
+                total_tokens_request = usage.get("totalTokenCount", 0)
+                
+                total_prompt_tokens += prompt_tokens
+                total_candidates_tokens += candidates_tokens
+                total_tokens += total_tokens_request
+                
+                print(f"[Google AI Node] [{time.strftime('%H:%M:%S')}] Image {i + 1} token usage: {total_tokens_request} tokens (prompt: {prompt_tokens}, candidates: {candidates_tokens})")
 
             # Get the first candidate (API returns 1 image per request)
             candidate = result["candidates"][0]
@@ -256,6 +274,12 @@ class GoogleAIGenerateImage:
         print(f"[Google AI Node] [{time.strftime('%H:%M:%S')}] Image generation completed successfully!")
         print(f"[Google AI Node] [{time.strftime('%H:%M:%S')}] Total time taken: {end_time - start_time:.2f} seconds")
         print(f"[Google AI Node] [{time.strftime('%H:%M:%S')}] Generated {len(generated_images)} image(s)")
+        
+        # Display total token usage
+        if total_tokens > 0:
+            print(f"[Google AI Node] [{time.strftime('%H:%M:%S')}] Total token usage: {total_tokens} tokens")
+            print(f"[Google AI Node] [{time.strftime('%H:%M:%S')}]   - Prompt tokens: {total_prompt_tokens}")
+            print(f"[Google AI Node] [{time.strftime('%H:%M:%S')}]   - Candidates tokens: {total_candidates_tokens}")
 
         # Convert list of numpy arrays to a single tensor batch
         image_tensor = torch.from_numpy(np.stack(generated_images)).float()
