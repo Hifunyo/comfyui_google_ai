@@ -5,6 +5,11 @@ import torch
 import numpy as np
 from PIL import Image
 
+def mask_api_key(api_key):
+    if not api_key or len(api_key) < 8:
+        return "****"
+    return api_key[:4] + "*" * (len(api_key) - 8) + api_key[-4:]
+
 class GoogleAIGenerateImage:
     @classmethod
     def INPUT_TYPES(cls):
@@ -65,6 +70,9 @@ class GoogleAIGenerateImage:
         if not api_key or not api_key.strip():
             print(f"[Google AI Node] [{time.strftime('%H:%M:%S')}] ERROR: API Key is empty!")
             raise ValueError("Please enter a valid Google AI API Key")
+        
+        masked_key = mask_api_key(api_key.strip())
+        print(f"[Google AI Node] [{time.strftime('%H:%M:%S')}] Using API Key: {masked_key}")
         
         # Setup proxy if provided
         proxies = None
